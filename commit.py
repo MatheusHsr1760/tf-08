@@ -17,3 +17,37 @@ class Commit:
             return
 
         self.pai.historico()
+
+
+# Gerencia o conjunto de commits e o ponteiro para o commit mais recente.
+class Repositorio:
+    # Inicializa o repositorio com nome, autor, sem commits e contador zerado.
+    def __init__(self, nome, autor):
+        self.nome = nome
+        self.autor = autor
+        self.head = None
+        self.contador = 0
+
+    # Cria um novo commit com id unico e atualiza o head para apontar para ele.
+    def commitar(self, mensagem):
+        self.contador += 1
+        novo_commit = Commit(self.contador, mensagem, self.autor, self.head)
+        self.head = novo_commit
+
+    # Exibe o historico completo a partir do commit mais recente (head).
+    def log(self):
+        # Se nao houver nenhum commit registrado, avisa e retorna antecipadamente
+        if self.head is None:
+            print("Nenhum commit ainda")
+            return
+
+        self.head.historico()
+
+    # Conta o numero total de commits percorrendo a corrente de pais ate o inicio.
+    def total_de_commits(self):
+        total = 0
+        atual = self.head
+        while atual is not None:
+            total += 1
+            atual = atual.pai
+        return total
