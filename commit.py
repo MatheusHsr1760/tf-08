@@ -51,3 +51,13 @@ class Repositorio:
             total += 1
             atual = atual.pai
         return total
+
+
+# Teste do repositorio com dados reais
+repositorio = Repositorio("meu-projeto", "Matheus Ramos - SEU_RA_AQUI")
+repositorio.log()
+repositorio.commitar("Cria a estrutura inicial do projeto")
+repositorio.commitar("Adiciona a documentacao de instalacao")
+repositorio.commitar("Atualiza instrucoes no README")
+repositorio.log()
+print(repositorio.total_de_commits())
